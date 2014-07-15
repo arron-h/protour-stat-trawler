@@ -1,3 +1,9 @@
 <div class="well">
-    Welcome to Yeoman and Ember.js!
+    {{avgAge}}
+
+    <ul>
+	{{#each model}}
+    	<li>{{name}}!</li>
+  	{{/each}}
+</ul>
 </div>
