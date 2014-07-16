@@ -1,23 +1,27 @@
 import Models
 from trawlers.TrawlerFactory import TrawlerFactory
+from trawlers.TrawlerTypes import TrawlerTypes
 
 def main():
-	trawlerFactory = TrawlerFactory()
-
-	riderListTrawler = trawlerFactory.getTrawlerForRiderList()
-	riders = riderListTrawler.trawlRiderList(2014)
+	riderListTrawler = TrawlerFactory.getTrawler(TrawlerTypes.LIST)
+	riders = riderListTrawler.trawl(2014)
+	errors = []
 
 	totalHeight = 0
 	heightCount = 0
 	totalWeight = 0
 	weightCount = 0
 
-	for k in riders:
-		rider = riders[k]
-		riderStatsTrawler = getTrawlerForRiderStats(rider)
+	for rider in riders:
+		riderStatsTrawler = TrawlerFactory.getTrawler(TrawlerTypes.STATS)
 
 		print("Getting stats for " + rider.name + "...")
-		riderStatsTrawler.trawlRiderStats(rider)
+		try:
+			riderStatsTrawler.trawl(rider)
+		except StandardError, e:
+			errors.append(rider.name + ": " + str(e))
+			print("Failed: " + str(e))
+			continue
 
 		#  Work out quick average
 		if (rider.height):

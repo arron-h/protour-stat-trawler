@@ -1,15 +1,12 @@
-from WikipediaTrawler import WikipediaTrawler
+from TrawlerTypes import TrawlerTypes
+from list.WikipediaListTrawler import WikipediaListTrawler
+from stats.WikipediaStatsTrawler import WikipediaStatsTrawler
 
 class TrawlerFactory:
 	
-	def getTrawlerForRiderList():
-		# For now, just use the wikipedia trawler
-		trawler = WikipediaTrawler()
-
-		return trawler
-
-	def getTrawlerForRiderStats(rider):
-		# For now, just use the wikipedia trawler
-		trawler = WikipediaTrawler()
-
-		return trawler
+	@staticmethod
+	def getTrawler(type):
+		if type == TrawlerTypes.LIST:
+			return WikipediaListTrawler()
+		elif type == TrawlerTypes.STATS:
+			return WikipediaStatsTrawler()
