@@ -22,9 +22,23 @@ class EmberFixtureExporter(AbstractExporter):
 
 		return text
 
+	def _exportMetrics(self, metrics):
+		text = "App.Metrics.FIXTURES = ["
+
+		text += "\n\t{ id: 0, "
+		text += "averageAge: " + str(metrics.averageAge) + ", "
+		text += "averageWeight: " + str(metrics.averageWeight) + ", "
+		text += "averageHeight: " + str(metrics.averageHeight)
+		text += "}"
+		text += "\n];"
+
+		return text
+
 	def export(self, riders, metrics):
 		fileContent = ""
 		fileContent += self._exportRiders(riders)
+		fileContent += "\n\n"
+		fileContent += self._exportMetrics(metrics)
 
 		f = open("data.js", "w")
 		f.write(fileContent)
