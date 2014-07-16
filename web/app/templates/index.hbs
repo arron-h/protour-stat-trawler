@@ -1,35 +1,102 @@
-<div class="jumbotron">
-	<h1>ProTrawler</h1>
-	<p>A simple website setup to trawl various sources to calculate metrics UCI ProTour cyclists.</p>
+<div class="row">
+	<div class="col-md-12">
+		<div class="jumbotron">
+			<h1>ProTrawler</h1>
+			<p>A simple website setup to trawl various sources to calculate metrics UCI ProTour cyclists.</p>
+		</div>
+	</div>
 </div>
 
-<h1>Metics</h1>
-<div class="panel panel-default">
-	Some info
+<div class="row">
+	<div class="col-md-12">
+		<h1>Metrics</h1>
+	</div>
 </div>
 
-<h1>Riders</h1>
-<div class="panel panel-default">
-	<table class="table">
-		<tr>
-			<th></th>
-			<th>Name</th>
-			<th>Age</th>
-			<th>Weight</th>
-			<th>Height</th>
-		</tr>
-		{{#each model}}
-			<tr>
-				<td></td>
-				<td>{{name}}</td>
-				<td>{{age}}</td>
-				<td>{{weight}}</td>
-				<td>{{height}}</td>
-			</tr>
-		{{/each}}
-	</table>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table style="width:100%">
+					<tr>
+						<td class="pull-right" style="margin-right: 50px">
+							<h3><span class="label label-default">Average Weight</span></h3>
+						</td>
+						<td>
+							<h3>{{model.metrics.averageWeight}} kg</h3>
+						</td>
+					</tr>
+					<tr>
+						<td class="pull-right" style="margin-right: 50px">
+							<h3><span class="label label-default">Average Height</span></h3>
+						</td>
+						<td>
+							<h3>{{model.metrics.averageHeight}} m</h3>
+						</td>
+					</tr>
+					<tr>
+						<td class="pull-right" style="margin-right: 50px">
+							<h3><span class="label label-default">Average Age</span></h3>
+						</td>
+						<td>
+							<h3>{{model.metrics.averageAge}} years</h3>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
 
-<h1>Graphs</h1>
+<div class="row">
+	<div class="col-md-12">
+		<h1>Riders</h1>
+	</div>
+</div>
 
-<h1>About</h1>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<table class="table">
+				<tr>
+					<th></th>
+					<th>Name</th>
+					<th>Age</th>
+					<th>Weight</th>
+					<th>Height</th>
+				</tr>
+				{{#each model.riders}}
+					<tr>
+						<td></td>
+						<td>{{name}}</td>
+						<td>{{age}}</td>
+						<td>{{weight}}</td>
+						<td>{{height}}</td>
+					</tr>
+				{{/each}}
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<h1>Graphs</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<h1>About</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="well">
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+		</div>
+	</div>
+</div>

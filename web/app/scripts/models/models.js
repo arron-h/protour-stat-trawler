@@ -12,3 +12,10 @@ App.Rider = DS.Model.extend(
 	age: DS.attr(),
 	country: DS.belongsTo('country')
 });
+
+App.Metrics = DS.Model.extend(
+{
+	averageAge: DS.attr(),
+	averageWeight: DS.attr(),
+	averageHeight: DS.attr()
+});
