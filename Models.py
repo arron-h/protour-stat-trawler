@@ -8,3 +8,10 @@ class Rider:
 
 	def setTrawlerData(self, data):
 		self.implData = data
+
+class Metrics:
+
+	def __init__(self):
+		self.averageWeight = 0
+		self.averageHeight = 0
+		self.averageAge    = 0

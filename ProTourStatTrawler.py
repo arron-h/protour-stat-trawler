@@ -1,17 +1,16 @@
-import Models
+from metrics.MetricsCalculator import MetricsCalculator
 from trawlers.TrawlerFactory import TrawlerFactory
 from trawlers.TrawlerTypes import TrawlerTypes
+from Models import Metrics
 
 def main():
 	riderListTrawler = TrawlerFactory.getTrawler(TrawlerTypes.LIST)
-	riders = riderListTrawler.trawl(2014)
-	errors = []
-
-	totalHeight = 0
-	heightCount = 0
-	totalWeight = 0
-	weightCount = 0
-
+	errors  = []
+	riders  = riderListTrawler.trawl(2014)
+	metrics = Metrics()
+	metricsCalculator = MetricsCalculator()
+	
+	# Trawl
 	for rider in riders:
 		riderStatsTrawler = TrawlerFactory.getTrawler(TrawlerTypes.STATS)
 
@@ -20,22 +19,13 @@ def main():
 			riderStatsTrawler.trawl(rider)
 		except StandardError, e:
 			errors.append(rider.name + ": " + str(e))
-			print("Failed: " + str(e))
 			continue
 
-		#  Work out quick average
-		if (rider.height):
-			totalHeight += float(rider.height)
-			heightCount += 1
-		if (rider.weight):
-			totalWeight += float(rider.weight)
-			weightCount += 1
+		metricsCalculator.recalculate(metrics, rider)
 
-	avgWeight = totalWeight / weightCount
-	avgHeight = totalHeight / heightCount
+	# Export
 
-	print("Average weight: " + str(avgWeight) + "("+str(weightCount)+")")
-	print("Average height: " + str(avgHeight) + "("+str(heightCount)+")")
+
 
 if __name__ == "__main__":
 	main()
