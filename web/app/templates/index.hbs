@@ -1,9 +1,35 @@
-<div class="well">
-    {{avgAge}}
-
-    <ul>
-	{{#each model}}
-    	<li>{{name}}!</li>
-  	{{/each}}
-</ul>
+<div class="jumbotron">
+	<h1>ProTrawler</h1>
+	<p>A simple website setup to trawl various sources to calculate metrics UCI ProTour cyclists.</p>
 </div>
+
+<h1>Metics</h1>
+<div class="panel panel-default">
+	Some info
+</div>
+
+<h1>Riders</h1>
+<div class="panel panel-default">
+	<table class="table">
+		<tr>
+			<th></th>
+			<th>Name</th>
+			<th>Age</th>
+			<th>Weight</th>
+			<th>Height</th>
+		</tr>
+		{{#each model}}
+			<tr>
+				<td></td>
+				<td>{{name}}</td>
+				<td>{{age}}</td>
+				<td>{{weight}}</td>
+				<td>{{height}}</td>
+			</tr>
+		{{/each}}
+	</table>
+</div>
+
+<h1>Graphs</h1>
+
+<h1>About</h1>
