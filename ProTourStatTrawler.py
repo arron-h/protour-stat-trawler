@@ -1,6 +1,8 @@
 from metrics.MetricsCalculator import MetricsCalculator
 from trawlers.TrawlerFactory import TrawlerFactory
 from trawlers.TrawlerTypes import TrawlerTypes
+from exporters.ExporterFactory import ExporterFactory
+from exporters.ExporterTypes import ExporterTypes
 from Models import Metrics
 
 def main():
@@ -24,8 +26,8 @@ def main():
 		metricsCalculator.recalculate(metrics, rider)
 
 	# Export
-
-
+	exporter = ExporterFactory.getExporter(ExporterTypes.EMBER_FIXTURE)
+	exporter.export(riders, metrics)
 
 if __name__ == "__main__":
 	main()

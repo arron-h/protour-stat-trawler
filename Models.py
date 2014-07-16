@@ -1,9 +1,9 @@
 class Rider:
 
 	def __init__(self, name):
-		self.age = None
-		self.weight = None
-		self.height = None
+		self.age = 0
+		self.weight = 0
+		self.height = 0
 		self.name = name
 
 	def setTrawlerData(self, data):
