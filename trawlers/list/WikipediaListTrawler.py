@@ -6,8 +6,9 @@ from trawlers.sites.Wikipedia import Wikipedia
 class WikipediaListTrawler(AbstractListTrawler):
 
 	def _buildRiderList(self, year):
-		response = None
-		riders   = []
+		response  = None
+		riders    = []
+		countries = {}
 
 		try:
 			response = urllib2.urlopen("http://en.wikipedia.org/wiki/List_of_"+
@@ -17,7 +18,7 @@ class WikipediaListTrawler(AbstractListTrawler):
 
 		html = response.read()
 
-		prog    = re.compile("<a href=\"(.*?)\"[^>]*>(.*?)</a>&#160;<span style=\"font-size:90%;\">\(<abbr title=\".*?\">[A-Z]{3}</abbr>\)</span></td>")
+		prog    = re.compile("<a href=\"(.*?)\"[^>]*>(.*?)</a>&#160;<span style=\"font-size:90%;\">\(<abbr title=\"(.*?)\">([A-Z]{3})</abbr>\)</span></td>")
 		matches = prog.findall(html)
 
 		# Grab riders
@@ -30,9 +31,17 @@ class WikipediaListTrawler(AbstractListTrawler):
 
 			rider.setTrawlerData(wikiData)
 
+			# Grab country name
+			countryId   = match[3]
+			countryName = match[2]
+			if not countryId in countries:
+				countries[countryId] = countryName
+
+			rider.country = countryId
+
 			riders.append(rider)
 
-		return riders
+		return (riders, countries)
 
 	def trawl(self, year):
 		return self._buildRiderList(year)

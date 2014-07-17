@@ -8,7 +8,7 @@ from Models import Metrics
 def main():
 	riderListTrawler = TrawlerFactory.getTrawler(TrawlerTypes.LIST)
 	errors  = []
-	riders  = riderListTrawler.trawl(2014)
+	riders, countries = riderListTrawler.trawl(2014)
 	metrics = Metrics()
 	metricsCalculator = MetricsCalculator()
 	
@@ -25,9 +25,15 @@ def main():
 
 		metricsCalculator.recalculate(metrics, rider)
 
+	# Print errors
+	if len(errors):
+		print("Errors while trawling:-")
+		for e in errors:
+			print("\t" + e)
+
 	# Export
 	exporter = ExporterFactory.getExporter(ExporterTypes.EMBER_FIXTURE)
-	exporter.export(riders, metrics)
+	exporter.export(riders, metrics, countries)
 
 if __name__ == "__main__":
 	main()

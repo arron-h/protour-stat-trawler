@@ -9,6 +9,9 @@ weightRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Weight<
 heightCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left;\">Height</th>")
 heightRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Height</th>\n<td>([0-9\.]+)[&#160;]*\s?(M|m|cm|CM|Cm|metres).*?</td>", re.MULTILINE)
 
+ageCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left;\">Born</th>")
+ageRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Born</th>\n<td>.*?([0-9]{2})\)</span>", re.MULTILINE|re.DOTALL)
+
 class WikipediaStatsTrawler(AbstractStatsTrawler):
 
 	def __init__(self):
@@ -38,6 +41,13 @@ class WikipediaStatsTrawler(AbstractStatsTrawler):
 				rider.height = self._normalizeHeight(m)
 			else:
 				raise StandardError("Failed to retrieve height. Error matching regular expression.")
+
+		if ageCheckRx.search(html):
+			m = ageRx.search(html)
+			if m:
+				rider.age = m.group(1)
+			else:
+				raise StandardError("Failed to retrieve age. Error matching regular expression.")
 
 	def _cachedFilePath(self, rider):
 		return "/tmp/pagecache/" + rider.implData["cache"]
