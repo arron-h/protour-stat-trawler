@@ -67,11 +67,25 @@
 				</tr>
 				{{#each model.riders}}
 					<tr>
-						<td></td>
+						<td>
+							<img {{bind-attr src=country.flagUrl}}/>
+						</td>
 						<td>{{name}}</td>
 						<td>{{age}}</td>
-						<td>{{weight}}</td>
-						<td>{{height}}</td>
+						<td>
+							{{#if weight}}
+								{{weight}} kg
+							{{else}}
+								?
+							{{/if}}
+						</td>
+						<td>
+							{{#if height}}
+								{{height}} m
+							{{else}}
+								?
+							{{/if}}
+						</td>
 					</tr>
 				{{/each}}
 			</table>
