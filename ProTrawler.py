@@ -25,6 +25,12 @@ def main():
 
 		metricsCalculator.recalculate(metrics, rider)
 
+	# Print errors
+	if len(errors):
+		print("Errors while trawling:-")
+		for e in errors:
+			print("\t" + e)
+
 	# Export
 	exporter = ExporterFactory.getExporter(ExporterTypes.EMBER_FIXTURE)
 	exporter.export(riders, metrics, countries)
