@@ -25,10 +25,17 @@ class EmberFixtureExporter(AbstractExporter):
 	def _exportMetrics(self, metrics):
 		text = "App.Metrics.FIXTURES = ["
 
+		textualAge = ("{:.1f}"
+			.format(metrics.averageAge))
+		textualWeight = ("{:.2f}"
+			.format(metrics.averageWeight))
+		textualHeight = ("{:.2f}"
+			.format(metrics.averageHeight))
+
 		text += "\n\t{ id: 0, "
-		text += "averageAge: " + str(metrics.averageAge) + ", "
-		text += "averageWeight: " + str(metrics.averageWeight) + ", "
-		text += "averageHeight: " + str(metrics.averageHeight)
+		text += "averageAge: " + textualAge + ", "
+		text += "averageWeight: " + textualWeight + ", "
+		text += "averageHeight: " + textualHeight
 		text += "}"
 		text += "\n];"
 
