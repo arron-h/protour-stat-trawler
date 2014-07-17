@@ -3,7 +3,7 @@ from AbstractExporter import AbstractExporter
 class EmberFixtureExporter(AbstractExporter):
 
 	def _exportRiders(self, riders):
-		text  = "App.Riders.FIXTURES = ["
+		text  = "App.Rider.FIXTURES = ["
 
 		for i in range(0, len(riders)):
 			rider = riders[i]
@@ -36,8 +36,9 @@ class EmberFixtureExporter(AbstractExporter):
 		text += "\n\t{ id: 0, "
 		text += "averageAge: " + textualAge + ", "
 		text += "averageWeight: " + textualWeight + ", "
-		text += "averageHeight: " + textualHeight
-		text += "}"
+		text += "averageHeight: " + textualHeight + ", "
+		text += "countryRep: \"" + metrics.countryRep + "\""
+		text += " }"
 		text += "\n];"
 
 		return text
