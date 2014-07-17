@@ -42,6 +42,14 @@
 							<h3>{{model.metrics.averageAge}} years</h3>
 						</td>
 					</tr>
+					<tr>
+						<td class="pull-right" style="margin-right: 50px">
+							<h3><span class="label label-default">Biggest Representation</span></h3>
+						</td>
+						<td>
+							<img {{bind-attr src=model.metrics.countryRep.bigFlagUrl title=model.metrics.countryRep.name}}/>
+						</td>
+					</tr>
 				</table>
 			</div>
 		</div>

@@ -21,9 +21,9 @@ App.FlagUrlBuilder = function(country, size)
 	// Url must have underscores
 	country = country.replace(/\s/g, "_");
 
-	if (App.FlagUrlHashes[country])
+	if (App.FlagUrlHashes[country] && App.FlagUrlHashes[country][size])
 	{
-		return App.FlagUrlHashes[country];
+		return App.FlagUrlHashes[country][size];
 	}
 	
 	// Calculates the flag url
@@ -35,7 +35,8 @@ App.FlagUrlBuilder = function(country, size)
 		hashedComponents + "/" + filename + "/" +
 		size + "px-" + filename + ".png";
 
-	App.FlagUrlHashes[country] = url;
+	App.FlagUrlHashes[country] = {};
+	App.FlagUrlHashes[country][size] = url;
 
 	return url;
 }
