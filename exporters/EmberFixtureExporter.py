@@ -3,7 +3,7 @@ from AbstractExporter import AbstractExporter
 class EmberFixtureExporter(AbstractExporter):
 
 	def _exportRiders(self, riders):
-		text  = "App.Riders.FIXTURES = ["
+		text  = "App.Rider.FIXTURES = ["
 
 		for i in range(0, len(riders)):
 			rider = riders[i]
