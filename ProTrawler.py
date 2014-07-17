@@ -25,6 +25,9 @@ def main():
 
 		metricsCalculator.recalculate(metrics, rider)
 
+	# Perform post-calc
+	metricsCalculator.performPostCalculations(metrics)
+
 	# Print errors
 	if len(errors):
 		print("Errors while trawling:-")
