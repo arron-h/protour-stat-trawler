@@ -13,7 +13,8 @@ class EmberFixtureExporter(AbstractExporter):
 			text += "name: \"" + rider.name + "\", "
 			text += "age: " + str(rider.age) + ", "
 			text += "weight: " + str(rider.weight) + ", "
-			text += "height: " + str(rider.height)
+			text += "height: " + str(rider.height) + ", "
+			text += "country: \"" + str(rider.country) + "\""
 			text += " },"
 
 		text = text[:-1] # Remove last comma
@@ -41,11 +42,31 @@ class EmberFixtureExporter(AbstractExporter):
 
 		return text
 
-	def export(self, riders, metrics):
+	def _exportCountries(self, countries):
+		text = "App.Country.FIXTURES = ["
+
+		for key in countries:
+			value = countries[key]
+
+			text += "\n\t{ "
+			text += "id: \"" + key + "\", "
+			text += "name: \"" + value + "\""
+			text += " },"
+
+		text = text[:-1] # Remove last comma
+
+		text += "\n];"
+
+		return text
+
+
+	def export(self, riders, metrics, countries):
 		fileContent = ""
 		fileContent += self._exportRiders(riders)
 		fileContent += "\n\n"
 		fileContent += self._exportMetrics(metrics)
+		fileContent += "\n\n"
+		fileContent += self._exportCountries(countries)
 
 		f = open("data.js", "w")
 		f.write(fileContent)

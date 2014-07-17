@@ -5,6 +5,8 @@ class Rider:
 		self.weight = 0
 		self.height = 0
 		self.name = name
+		self.country = None
+		self.team = None
 
 	def setTrawlerData(self, data):
 		self.implData = data
