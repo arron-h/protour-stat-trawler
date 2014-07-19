@@ -1,0 +1,32 @@
+<table class="table">
+	<tr>
+		<th></th>
+		<th>Name</th>
+		<th>Age</th>
+		<th>Weight</th>
+		<th>Height</th>
+	</tr>
+	{{#each arrangedContent}}
+		<tr>
+			<td>
+				{{flagUrlImg country.name "23"}}
+			</td>
+			<td>{{name}}</td>
+			<td>{{age}}</td>
+			<td>
+				{{#if weight}}
+					{{weight}} kg
+				{{else}}
+					?
+				{{/if}}
+			</td>
+			<td>
+				{{#if height}}
+					{{height}} m
+				{{else}}
+					?
+				{{/if}}
+			</td>
+		</tr>
+	{{/each}}
+</table>

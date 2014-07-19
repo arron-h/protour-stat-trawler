@@ -1,16 +1,6 @@
 App.Country = DS.Model.extend(
 {
-	name: DS.attr(),
-
-	flagUrl: function()
-	{
-		return App.FlagUrlBuilder(this.get("name"), 23);
-	}.property("name"),
-
-	bigFlagUrl: function()
-	{
-		return App.FlagUrlBuilder(this.get("name"), 60);
-	}.property("name")
+	name: DS.attr()
 });
 
 App.Rider = DS.Model.extend(

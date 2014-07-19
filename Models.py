@@ -17,3 +17,5 @@ class Metrics:
 		self.averageWeight = 0
 		self.averageHeight = 0
 		self.averageAge    = 0
+		self.countryRep    = ""
+		self.countryRepCount = 0
