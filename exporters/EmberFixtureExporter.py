@@ -37,7 +37,8 @@ class EmberFixtureExporter(AbstractExporter):
 		text += "averageAge: " + textualAge + ", "
 		text += "averageWeight: " + textualWeight + ", "
 		text += "averageHeight: " + textualHeight + ", "
-		text += "countryRep: \"" + metrics.countryRep + "\""
+		text += "countryRep: \"" + metrics.countryRep + "\", "
+		text += "countryRepCount: " + metrics.countryRepCount
 		text += " }"
 		text += "\n];"
 

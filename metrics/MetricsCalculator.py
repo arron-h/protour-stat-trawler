@@ -50,3 +50,4 @@ class MetricsCalculator:
 		s.reverse()
 		
 		metrics.countryRep = s[0][0]
+		metrics.countryRepCount = s[0][1]
