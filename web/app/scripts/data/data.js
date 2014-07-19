@@ -507,7 +507,7 @@ App.Rider.FIXTURES = [
 ];
 
 App.Metrics.FIXTURES = [
-	{ id: 0, averageAge: 28.0, averageWeight: 68.69, averageHeight: 1.80, countryRep: "FRA" }
+	{ id: 0, averageAge: 28.0, averageWeight: 68.69, averageHeight: 1.80, countryRep: "FRA", countryRepCount: 70 }
 ];
 
 App.Country.FIXTURES = [

@@ -15,6 +15,7 @@ App.Rider = DS.Model.extend(
 App.Metrics = DS.Model.extend(
 {
 	countryRep: DS.belongsTo('country'),
+	countryRepCount: DS.attr(),
 	averageAge: DS.attr(),
 	averageWeight: DS.attr(),
 	averageHeight: DS.attr()
