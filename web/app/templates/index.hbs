@@ -23,7 +23,7 @@
 							<h3><span class="label label-default">Average Weight</span></h3>
 						</td>
 						<td>
-							<h3>{{model.metrics.averageWeight}} kg</h3>
+							<h3>{{averageWeight}} kg</h3>
 						</td>
 					</tr>
 					<tr>
@@ -31,7 +31,7 @@
 							<h3><span class="label label-default">Average Height</span></h3>
 						</td>
 						<td>
-							<h3>{{model.metrics.averageHeight}} m</h3>
+							<h3>{{averageHeight}} m</h3>
 						</td>
 					</tr>
 					<tr>
@@ -39,7 +39,7 @@
 							<h3><span class="label label-default">Average Age</span></h3>
 						</td>
 						<td>
-							<h3>{{model.metrics.averageAge}} years</h3>
+							<h3>{{averageAge}} years</h3>
 						</td>
 					</tr>
 					<tr>
@@ -47,7 +47,7 @@
 							<h3><span class="label label-default">Biggest Representation</span></h3>
 						</td>
 						<td>
-							<img {{bind-attr src=model.metrics.countryRep.bigFlagUrl title=model.metrics.countryRep.name}}/>
+							<h3>{{countryRep.name}} <small><h3>{{countryRepCount}}</h3></small></h3>
 						</td>
 					</tr>
 				</table>
@@ -65,38 +65,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
-			<table class="table">
-				<tr>
-					<th></th>
-					<th>Name</th>
-					<th>Age</th>
-					<th>Weight</th>
-					<th>Height</th>
-				</tr>
-				{{#each model.riders}}
-					<tr>
-						<td>
-							<img {{bind-attr src=country.flagUrl}}/>
-						</td>
-						<td>{{name}}</td>
-						<td>{{age}}</td>
-						<td>
-							{{#if weight}}
-								{{weight}} kg
-							{{else}}
-								?
-							{{/if}}
-						</td>
-						<td>
-							{{#if height}}
-								{{height}} m
-							{{else}}
-								?
-							{{/if}}
-						</td>
-					</tr>
-				{{/each}}
-			</table>
+			{{outlet riderlist}}
 		</div>
 	</div>
 </div>
