@@ -85,9 +85,27 @@
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
 		<div class="well">
-		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-		</p>
+			<h4>This is cool! What's it all about?</h4>
+			<p>
+				The other day I was wondering what the average weight and height of a pro cyclist was. There's a few sources
+				online but the information is sketchy and without citation. I decided I'd write a little python script which
+				would trawl Wikipedia to gather riders weights and heights, and then work out the average based on these numbers.
+				This seemed to work pretty well, so I thought I'd knock up a website which displayed this data. Et voilà.
+			</p>
+			<h4>How does it work?</h4>
+			<p>
+				So initially I planned on just trawling Wikipedia. This works pretty well but there's lots of incomplete
+				rider pages - especially for younger riders. So instead, where possible, I also trawl team websites. Some teams
+				have consistent, easy to generate urls based on rider names. Others don't. If a rider doesn't have any stats,
+				they aren't shown on the list.<br/>
+				For the web interface, I used <a href="http://www.emberjs.com">EmberJS</a> with the generated data set as a 
+				fixture. This might seem overkill, but it means I can do things like sorting and graphs without excessive amounts
+				of JQuery.
+			</p>
+			<h4>I want to see how it works!</h4>
+			<p>
+				Sure. Go here: <a href="https://github.com/arron-h/protour-stat-trawler">https://github.com/arron-h/protour-stat-trawler</a>.
+			</p>
 		</div>
 	</div>
 </div>
