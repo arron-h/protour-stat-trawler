@@ -14,7 +14,8 @@ class EmberFixtureExporter(AbstractExporter):
 			text += "age: " + str(rider.age) + ", "
 			text += "weight: " + str(rider.weight) + ", "
 			text += "height: " + str(rider.height) + ", "
-			text += "country: \"" + str(rider.country) + "\""
+			text += "country: \"" + str(rider.country) + "\", "
+			text += "team: \"" + str(rider.team) + "\""
 			text += " },"
 
 		text = text[:-1] # Remove last comma

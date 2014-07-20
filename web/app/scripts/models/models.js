@@ -9,6 +9,7 @@ App.Rider = DS.Model.extend(
 	weight: DS.attr(),
 	height: DS.attr(),
 	age: DS.attr(),
+	team: DS.attr(),
 	country: DS.belongsTo('country')
 });
 
