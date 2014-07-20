@@ -2,6 +2,7 @@
 	<tr>
 		<th class="flagColumn"></th>
 		<th>Name</th>
+		<th class="teamColumn">Team</th>
 		<th class="dataColumn">{{view "sortIndicator" column="age"}}</th>
 		<th class="dataColumn">{{view "sortIndicator" column="weight"}}</th>
 		<th class="dataColumn">{{view "sortIndicator" column="height"}}</th>
@@ -12,6 +13,7 @@
 				{{flagUrlImg country.name "23"}}
 			</td>
 			<td>{{name}}</td>
+			<td>{{team}}</td>
 			<td>{{age}}</td>
 			<td>
 				{{#if weight}}

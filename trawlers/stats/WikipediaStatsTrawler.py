@@ -4,13 +4,16 @@ from Models import Rider
 from trawlers.sites.Wikipedia import Wikipedia
 
 weightCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left;\">Weight</th>")
-weightRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Weight</th>\n<td>([0-9\.]+)[&#160;]*\s?(kg|KG|Kg|kilograms).*?</td>", re.MULTILINE)
+weightRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Weight</th>\n<td>([0-9\.]+)\s?(kg|KG|Kg|kilograms).*?</td>", re.MULTILINE)
 
 heightCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left;\">Height</th>")
-heightRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Height</th>\n<td>([0-9\.]+)[&#160;]*\s?(M|m|cm|CM|Cm|metres).*?</td>", re.MULTILINE)
+heightRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Height</th>\n<td>([0-9\.]+)\s?(M|m|cm|CM|Cm|metres).*?</td>", re.MULTILINE)
 
 ageCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left;\">Born</th>")
 ageRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Born</th>\n<td>.*?([0-9]{2})\)</span>", re.MULTILINE|re.DOTALL)
+
+teamCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left;\">Current\steam</th>")
+teamRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Current\steam</th>\n<td class=\"note\"><a[^>]*>(.*?)</a>", re.MULTILINE|re.DOTALL)
 
 class WikipediaStatsTrawler(AbstractStatsTrawler):
 
@@ -49,6 +52,13 @@ class WikipediaStatsTrawler(AbstractStatsTrawler):
 			else:
 				raise StandardError("Failed to retrieve age. Error matching regular expression.")
 
+		if teamCheckRx.search(html):
+			m = teamRx.search(html)
+			if m:
+				rider.team = m.group(1)
+			else:
+				raise StandardError("Failed to retrieve team. Error matching regular expression.")
+
 	def _cachedFilePath(self, rider):
 		return "/tmp/pagecache/" + rider.implData["cache"]
 
@@ -74,6 +84,16 @@ class WikipediaStatsTrawler(AbstractStatsTrawler):
 				return
 
 			html = response.read()
+
+			# Replace special strings
+			special = {
+				'&nbsp;' : ' ', 
+				'&#160;' : ' ', '&amp;' : '&', '&quot;' : '"',
+				'&lt;'   : '<', '&gt;'  : '>'
+			}
+
+			for (k,v) in special.items():
+				html = html.replace(k, v)
 
 			# Cache the html
 			cachedFile = self._cachedFilePath(rider)
