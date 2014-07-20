@@ -6,7 +6,7 @@
 		<th>{{view "sortIndicator" column="weight"}}</th>
 		<th>{{view "sortIndicator" column="height"}}</th>
 	</tr>
-	{{#each arrangedContent}}
+	{{#each limitedContent}}
 		<tr>
 			<td>
 				{{flagUrlImg country.name "23"}}
@@ -30,3 +30,8 @@
 		</tr>
 	{{/each}}
 </table>
+{{#if shouldShowMore}}
+<div class="center-block">
+	Displaying the first {{contentSetSize}} results. <a href="#" {{action "showMore"}}>Show more</a> or <a href="#" {{action "showAll"}}>show all</a>.
+</div>
+{{/if}}
