@@ -14,7 +14,7 @@ def main():
 	
 	# Trawl
 	for rider in riders:
-		riderStatsTrawler = TrawlerFactory.getTrawler(TrawlerTypes.STATS)
+		riderStatsTrawler = TrawlerFactory.getTrawler(TrawlerTypes.STATS, rider)
 
 		print("Getting stats for " + rider.name + "...")
 		try:

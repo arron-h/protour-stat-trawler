@@ -18,8 +18,10 @@ teamRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Current\s
 class WikipediaStatsTrawler(AbstractStatsTrawler):
 
 	def __init__(self):
-		if not os.path.exists("/tmp/pagecache"):
-			os.mkdir("/tmp/pagecache")
+		AbstractStatsTrawler.__init__(self)
+
+	def getName(self):
+		return "Wikipedia"
 
 	def _normalizeHeight(self, expr):
 		m = re.search("([0-9]+)[&#160;]*\s?(cm|CM|Cm).*", expr.group(0))
@@ -59,11 +61,10 @@ class WikipediaStatsTrawler(AbstractStatsTrawler):
 			else:
 				raise StandardError("Failed to retrieve team. Error matching regular expression.")
 
-	def _cachedFilePath(self, rider):
-		return "/tmp/pagecache/" + rider.implData["cache"]
-
 	def _tryLoadRiderFromCache(self, rider):
-		cachedFile = self._cachedFilePath(rider)
+		cacheDir   = self.getCacheDirectory()
+		cachedFile = os.path.join(cacheDir, rider.cacheableName)
+
 		if os.path.exists(cachedFile):
 			f    = open(cachedFile, "r")
 			html = f.read()
@@ -96,7 +97,8 @@ class WikipediaStatsTrawler(AbstractStatsTrawler):
 				html = html.replace(k, v)
 
 			# Cache the html
-			cachedFile = self._cachedFilePath(rider)
+			cacheDir   = self.getCacheDirectory()
+			cachedFile = os.path.join(cacheDir, rider.cacheableName)
 			f = open(cachedFile, "w")
 			f.write(html)
 
