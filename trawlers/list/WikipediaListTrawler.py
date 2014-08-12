@@ -81,7 +81,6 @@ class WikipediaListTrawler(AbstractListTrawler):
 				rider = Rider(riderDesc["name"])
 
 				wikiData = {}
-				wikiData["cache"] = Wikipedia.buildSafeCacheFilename(riderDesc["wikiurl"])
 				wikiData["url"]   = Wikipedia.baseUrl + riderDesc["wikiurl"]
 
 				rider.setTrawlerData(wikiData)
@@ -92,6 +91,7 @@ class WikipediaListTrawler(AbstractListTrawler):
 				if not countryId in countries:
 					countries[countryId] = countryName
 
+				rider.cacheableName = Wikipedia.buildSafeCacheFilename(riderDesc["wikiurl"])
 				rider.country = countryId
 				rider.team    = team["name"]
 

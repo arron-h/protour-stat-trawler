@@ -1,4 +1,4 @@
-import importlib
+import importlib, sys
 from TrawlerTypes import TrawlerTypes
 from list.WikipediaListTrawler import WikipediaListTrawler
 from stats.WikipediaStatsTrawler import WikipediaStatsTrawler
@@ -13,15 +13,15 @@ class TrawlerFactory:
 	def getStatsTrawler(rider):
 		trawlerClass = None
 		try:
-			trawlerName = makeFriendlyTeamName(rider.team)
+			trawlerName = TrawlerFactory.makeFriendlyTeamName(rider.team)
 			module = importlib.import_module(
-				"stats."+trawlerName+"StatsTrawler")
+				"trawlers.stats."+trawlerName+"StatsTrawler")
 			trawlerClass = getattr(module, trawlerName+"StatsTrawler")
-			print("Using " + trawlerName + " trawler for " + rider.name)
-		except:
+			print("\tUsing " + trawlerName + " trawler for " + rider.name)
+		except ImportError as e:
 			module = importlib.import_module("trawlers.stats.WikipediaStatsTrawler")
 			trawlerClass = getattr(module, "WikipediaStatsTrawler")
-			print("Using default Wikipedia trawler for " + rider.name)
+			print("\tUsing default Wikipedia trawler for " + rider.name)
 		
 		return trawlerClass()
 

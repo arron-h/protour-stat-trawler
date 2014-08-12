@@ -1,9 +1,10 @@
 import os, re, urllib2, sys
+from unidecode import unidecode
 from AbstractStatsTrawler import AbstractStatsTrawler
 from Models import Rider
 
-weightRx   = re.compile("<span class=\"labeled\">Weight:</span> ([0-9\.]+)kg")
-heightRx   = re.compile("<span class=\"labeled\">Height:</span> ([0-9\.]+)m")
+weightRx   = re.compile("<span class=\"labeled\">Weight:</span> ([0-9\.]+)\s?kg")
+heightRx   = re.compile("<span class=\"labeled\">Height:</span> ([0-9\.]+)\s?m")
 ageRx      = re.compile("<span class=\"labeled\">Date of birth:</span> [0-9]{2}/[0-9]{2}/[0-9]{4}<span> \(([0-9]+) years old\)</span>")
 
 class TeamEuropcarStatsTrawler(AbstractStatsTrawler):
@@ -16,30 +17,17 @@ class TeamEuropcarStatsTrawler(AbstractStatsTrawler):
 	def getName(self):
 		return "TeamEuropcar"	
 
-	def _matchRegExOrDie(self, regex, html, desc):
+	def _matchRegEx(self, regex, html, desc):
 		m = regex.search(html)
 		if m:
-			return = m.group(1)
-		else:
-			raise StandardError("Failed to retrieve "+desc+". Error matching regular expression.")
+			return m.group(1)
 
 		return 0
 
 	def _parseRiderHtml(self, rider, html):
-		rider.weight = _matchRegExOrDie(weightRx, html, "weigth")
-		rider.height = _matchRegExOrDie(heightRx, html, "height")
-		rider.age    = _matchRegExOrDie(ageRx,    html, "age")
-
-	def _tryLoadRiderFromCache(self, rider):
-		cacheDir   = self.getCacheDirectory()
-		cachedFile = os.path.join(cacheDir, rider.cacheableName)
-		if os.path.exists(cachedFile):
-			f    = open(cachedFile, "r")
-			html = f.read()
-
-			return html
-
-		return None
+		rider.weight = self._matchRegEx(weightRx, html, "weight")
+		rider.height = self._matchRegEx(heightRx, html, "height")
+		rider.age    = self._matchRegEx(ageRx,    html, "age")
 
 	def _getRiderStats(self, rider):
 		html = self._tryLoadRiderFromCache(rider)
@@ -50,12 +38,12 @@ class TeamEuropcarStatsTrawler(AbstractStatsTrawler):
 				riderNames = rider.name.split(" ")
 				url        = self.bioUrl
 				for nameComp in riderNames:
-					url = url + nameComp + "-"
+					url = url + unidecode(unicode(nameComp, "utf_8")) + "-"
 
 				url = url.rstrip("-") # Remove trailing -
 
 				response = urllib2.urlopen(url)
-			except:
+			except IOError:
 				print("Failed to retrieve html for " + rider.name)
 				return
 

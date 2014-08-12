@@ -14,9 +14,9 @@ def main():
 	
 	# Trawl
 	for rider in riders:
-		riderStatsTrawler = TrawlerFactory.getTrawler(TrawlerTypes.STATS, rider)
-
 		print("Getting stats for " + rider.name + "...")
+		riderStatsTrawler = TrawlerFactory.getTrawler(TrawlerTypes.STATS, rider)
+		
 		try:
 			riderStatsTrawler.trawl(rider)
 		except StandardError, e:

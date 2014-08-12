@@ -51,18 +51,6 @@ class WikipediaStatsTrawler(AbstractStatsTrawler):
 			else:
 				raise StandardError("Failed to retrieve age. Error matching regular expression.")
 
-	def _tryLoadRiderFromCache(self, rider):
-		cacheDir   = self.getCacheDirectory()
-		cachedFile = os.path.join(cacheDir, rider.cacheableName)
-
-		if os.path.exists(cachedFile):
-			f    = open(cachedFile, "r")
-			html = f.read()
-
-			return html
-
-		return None
-
 	def _getRiderStats(self, rider):
 		html = self._tryLoadRiderFromCache(rider)
 

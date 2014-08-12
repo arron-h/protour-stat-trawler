@@ -7,6 +7,7 @@ class Rider:
 		self.name = name
 		self.country = None
 		self.team = None
+		self.cacheableName = ""
 
 	def setTrawlerData(self, data):
 		self.implData = data
