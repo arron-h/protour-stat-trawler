@@ -20,5 +20,34 @@ th.dataColumn {
 }
 
 th.teamColumn {
-	width: 200px;
+  width: 200px;
+}
+
+/* D3 Stuff! */
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis-label {
+  font: 12px sans-serif;
+  font-weight: bold;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
 }
