@@ -10,16 +10,28 @@ App.IndexRoute = Ember.Route.extend(
 			outlet: 'riderlist',
 			controller: 'riderList'
 		});
+
+		this.render('graph',
+		{
+			into: 'index',
+			outlet: 'graph',
+			controller: 'graph'
+		});
 	},
 
 	setupController: function(controller, model)
 	{
 		this._super(controller, model);
 
+		// Cache countries so they're available to the graphs
+		App.CountryCache.cache(this.store.find('country'));
+
 		var metrics = this.store.find('metrics', 0);
 		controller.set('content', metrics);
 
 		var riders = this.store.find('rider');
+		
 		this.controllerFor('riderList').set('content', riders);
+		this.controllerFor('graph').set('content', riders);
 	}
 });
