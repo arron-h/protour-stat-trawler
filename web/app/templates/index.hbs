@@ -1,9 +1,9 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="jumbotron">
-			<h1>ProTrawler</h1>
-			<p>A UCI ProTour rider stat collation tool alluding to the fact that you could never be Pro.</p>
-			<p>This tool is in beta!</p>
+			<h1>ProTrawler: 2015 Edition</h1>
+			<p>A UCI ProTour/WorldTour rider stat collation tool alluding to the fact that you could never be Pro.</p>
+			<p><small><b>v0.2-2015</b>. Last trawled: {{exportDate}}.</small></p>
 		</div>
 	</div>
 </div>
@@ -24,7 +24,7 @@
 							<h3><span class="label label-default">Average Weight</span></h3>
 						</td>
 						<td>
-							<h3>{{averageWeight}} kg</h3>
+							<h3>{{metrics.averageWeight}} kg</h3>
 						</td>
 					</tr>
 					<tr>
@@ -32,7 +32,7 @@
 							<h3><span class="label label-default">Average Height</span></h3>
 						</td>
 						<td>
-							<h3>{{averageHeight}} m</h3>
+							<h3>{{metrics.averageHeight}} m</h3>
 						</td>
 					</tr>
 					<tr>
@@ -40,7 +40,7 @@
 							<h3><span class="label label-default">Average Age</span></h3>
 						</td>
 						<td>
-							<h3>{{averageAge}} years</h3>
+							<h3>{{metrics.averageAge}} years</h3>
 						</td>
 					</tr>
 					<tr>
@@ -48,7 +48,7 @@
 							<h3><span class="label label-default">Biggest Representation</span></h3>
 						</td>
 						<td>
-							<h3>{{countryRep.name}}&nbsp;<small>[{{countryRepCount}} riders] </small></h3>
+							<h3>{{metrics.countryRep.name}}&nbsp;<small>[{{metrics.countryRepCount}} riders] </small></h3>
 						</td>
 					</tr>
 				</table>

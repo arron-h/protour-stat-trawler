@@ -8,10 +8,13 @@ from Models import Metrics
 def main():
 	riderListTrawler = TrawlerFactory.getTrawler(TrawlerTypes.LIST)
 	errors  = []
-	riders, countries = riderListTrawler.trawl(2014)
+	riders, countries = riderListTrawler.trawl(2015)
 	metrics = Metrics()
 	metricsCalculator = MetricsCalculator()
-	
+
+	if len(riders) == 0:
+		raise Exception("No riders found! Something probably went wrong whilst trawling Wikipedia.")
+
 	# Trawl
 	for rider in riders:
 		riderStatsTrawler = TrawlerFactory.getTrawler(TrawlerTypes.STATS)

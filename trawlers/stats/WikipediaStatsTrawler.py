@@ -3,17 +3,17 @@ from AbstractStatsTrawler import AbstractStatsTrawler
 from Models import Rider
 from trawlers.sites.Wikipedia import Wikipedia
 
-weightCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left;\">Weight</th>")
-weightRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Weight</th>\n<td>([0-9\.]+)\s?(kg|KG|Kg|kilograms).*?</td>", re.MULTILINE)
+weightCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left[;]{0,1}\">Weight</th>")
+weightRx      = re.compile("<th scope=\"row\" style=\"text-align:left[;]{0,1}\">Weight</th>\n<td>([0-9\.]+)\s?(kg|KG|Kg|kilograms).*?</td>", re.MULTILINE)
 
-heightCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left;\">Height</th>")
-heightRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Height</th>\n<td>([0-9\.]+)\s?(M|m|cm|CM|Cm|metres).*?</td>", re.MULTILINE)
+heightCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left[;]{0,1}\">Height</th>")
+heightRx      = re.compile("<th scope=\"row\" style=\"text-align:left[;]{0,1}\">Height</th>\n<td>([0-9\.]+)\s?(M|m|cm|CM|Cm|metres).*?</td>", re.MULTILINE)
 
-ageCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left;\">Born</th>")
-ageRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Born</th>\n<td>.*?([0-9]{2})\)</span>", re.MULTILINE|re.DOTALL)
+ageCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left[;]{0,1}\">Born</th>")
+ageRx      = re.compile("<th scope=\"row\" style=\"text-align:left[;]{0,1}\">Born</th>\n<td>.*?([0-9]{2})\)</span>", re.MULTILINE|re.DOTALL)
 
-teamCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left;\">Current\steam</th>")
-teamRx      = re.compile("<th scope=\"row\" style=\"text-align:left;\">Current\steam</th>\n<td class=\"note\"><a[^>]*>(.*?)</a>", re.MULTILINE|re.DOTALL)
+teamCheckRx = re.compile("<th scope=\"row\" style=\"text-align:left[;]{0,1}\">Current\steam</th>")
+teamRx      = re.compile("<th scope=\"row\" style=\"text-align:left[;]{0,1}\">Current\steam</th>\n<td class=\"note\"><a[^>]*>(.*?)</a>", re.MULTILINE|re.DOTALL)
 
 class WikipediaStatsTrawler(AbstractStatsTrawler):
 

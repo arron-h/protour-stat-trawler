@@ -27,10 +27,14 @@ App.IndexRoute = Ember.Route.extend(
 		App.CountryCache.cache(this.store.find('country'));
 
 		var metrics = this.store.find('metrics', 0);
-		controller.set('content', metrics);
+		controller.set('content',
+		{
+			metrics: metrics,
+			exportDate: App.EXPORT.Date
+		});
 
 		var riders = this.store.find('rider');
-		
+
 		this.controllerFor('riderList').set('content', riders);
 		this.controllerFor('graph').set('content', riders);
 	}

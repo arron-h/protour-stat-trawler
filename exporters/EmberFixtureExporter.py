@@ -1,4 +1,5 @@
 from AbstractExporter import AbstractExporter
+import datetime
 
 class EmberFixtureExporter(AbstractExporter):
 
@@ -62,6 +63,11 @@ class EmberFixtureExporter(AbstractExporter):
 
 		return text
 
+	def _appendDateNow(self):
+		text = "App.EXPORT = { Date: "
+		text += "\"" + datetime.datetime.now().strftime("%d %B %Y") + "\" }\n"
+
+		return text
 
 	def export(self, riders, metrics, countries):
 		fileContent = ""
@@ -70,6 +76,9 @@ class EmberFixtureExporter(AbstractExporter):
 		fileContent += self._exportMetrics(metrics)
 		fileContent += "\n\n"
 		fileContent += self._exportCountries(countries)
+		fileContent += "\n\n"
+
+		fileContent += self._appendDateNow()
 
 		f = open("data.js", "w")
 		f.write(fileContent)

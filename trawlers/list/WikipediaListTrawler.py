@@ -5,20 +5,29 @@ from trawlers.sites.Wikipedia import Wikipedia
 
 class WikipediaListTrawler(AbstractListTrawler):
 
+	YEAR_URLS = {
+		2014: "http://en.wikipedia.org/wiki/List_of_2014_UCI_ProTeams_and_riders",
+		2015: "http://en.wikipedia.org/wiki/List_of_2015_UCI_WorldTeams_and_riders"
+	}
+
+	YEAR_REGEX = {
+		2014: "<a href=\"(.*?)\"[^>]*>(.*?)</a>&#160;<span style=\"font-size:90%;\">\(<abbr title=\"(.*?)\">([A-Z]{3})</abbr>\)</span></td>",
+		2015: "<a href=\"(.*?)\"[^>]*>(.*?)</a>&#160;<span style=\"font-size:90%;\">\(<abbr title=\"(.*?)\">([A-Z]{3})</abbr>\)</span></span></td>"
+	}
+
 	def _buildRiderList(self, year):
 		response  = None
 		riders    = []
 		countries = {}
 
 		try:
-			response = urllib2.urlopen("http://en.wikipedia.org/wiki/List_of_"+
-				str(year)+"_UCI_ProTeams_and_riders")
+			response = urllib2.urlopen(self.YEAR_URLS[year])
 		except:
 			raise IOError("Failed to open the url to Wikipedia.")
 
 		html = response.read()
 
-		prog    = re.compile("<a href=\"(.*?)\"[^>]*>(.*?)</a>&#160;<span style=\"font-size:90%;\">\(<abbr title=\"(.*?)\">([A-Z]{3})</abbr>\)</span></td>")
+		prog    = re.compile(self.YEAR_REGEX[year])
 		matches = prog.findall(html)
 
 		# Grab riders
